@@ -1,5 +1,5 @@
 schema_version: "1.0.0"
-name: Red Hat ATO Pathways
+name: Red Hat OpenShift Dedicated
 metadata:
   description: Aggregates all Red Hat OpenControl content.
   maintainers:
@@ -14,29 +14,12 @@ components:
 
 dependencies:
   standards:
-#    - ./../../opencontrol/standards
     - url: https://github.com/opencontrol/standards
       revision: master
   certifications:
-#    - ./../../opencontrol/certifications
     - url: https://github.com/opencontrol/certifications
       revision: master
   systems:
-    - url: https://github.com/ComplianceAsCode/redhat
-      contextdir: osp13
-      revision: opencontrol
-    - url: https://github.com/ComplianceAsCode/redhat
-      contextdir: ocp3
-      revision: opencontrol
-    - url: https://github.com/ComplianceAsCode/redhat
-      contextdir: idm
-      revision: opencontrol
-    - url: https://github.com/ComplianceAsCode/redhat
-      contextdir: ansible-tower
-      revision: opencontrol
-    - url: https://github.com/ComplianceAsCode/redhat
-      contextdir: rhvm
-      revision: opencontrol
-    - url: https://github.com/ComplianceAsCode/redhat
-      contextdir: rhvh
-      revision: opencontrol
+    - url: git@github.com:RedHatGov/osd-opencontrol.git
+      contextdir: /
+      revision: master

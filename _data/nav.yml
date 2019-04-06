@@ -1,7 +1,7 @@
 primary:
   - href: /getting-started/
-  - href: /ato-documents/
-  - href: /product-documents/
+  - href: /fedramp-documents/
+  - href: /security-controls/
 
 mobile:
   - href: /getting-started/
@@ -10,31 +10,51 @@ mobile:
   - href: /product-documents/
     collapsible: true
 
-Product Documents:
+Security Controls:
   - text: Overview
-    href: /product-documents/
-#  - text: RHEL6
-#    href: /product-documents/rhel6/
-#  - text: RHEL7
-#    href: /product-documents/rhel7/
-  - text: Ansible Tower
-    href: /product-documents/ansible-tower/
-  - text: OpenShift Container Platform 3.x
-    href: /product-documents/ocp3/
-  - text: OpenStack Platform 13
-    href: /product-documents/osp13/
-  - text: Red Hat Virtualization Host
-    href: /product-documents/rhvh/
-  - text: Red Hat Virtualization Manager
-    href: /product-documents/rhvm/
+    href: /security-controls/
+  - text: Access Control (AC)
+    href: /security-controls/ac/
+  - text: Awareness and Training (AT)
+    href: /security-controls/at/
+  - text: Audit and Accountability (AU)
+    href: /security-controls/au/
+  - text: Security Assessment & Authorization (CA)
+    href: /security-controls/ca/
+  - text: Configuration Management (CM)
+    href: /security-controls/cm/
+  - text: Contingency Planning (CP)
+    href: /security-controls/cp/
+  - text: Identification & Authentication (IA)
+    href: /security-controls/ia/
+  - text: Incident Response (IR)
+    href: /security-controls/ir/
+  - text: Maintenance (MA)
+    href: /security-controls/ma/
+  - text: Media Protection (MP)
+    href: /security-controls/mp/
+  - text: Physical & Environmental Protection (PE)
+    href: /security-controls/pe/
+  - text: Planning (PL)
+    href: /security-controls/pl/
+  - text: Personnel Security (PS)
+    href: /security-controls/ps/
+  - text: Risk Assessment (RA)
+    href: /security-controls/ra/
+  - text: System and Services Acquisition (SA)
+    href: /security-controls/sa/
+  - text: Systems & Communications Protection (SC)
+    href: /security-controls/sc/
+  - text: System & Information Integrity (SI)
+    href: /security-controls/si/
 
-ATO Documents:
+FedRAMP Documents:
   - text: Overview
-    href: /ato-documents/
+    href: /fedramp-documents/
   - text: Vulnerability Management Plan
-    href: /ato-documents/vulnerability-management-plan/
+    href: /fedramp-document/vulnerability-management-plan/
   - text: Security Awareness & Training Plan
-    href: /ato-documents/security-awareness-and-training-plan/
+    href: /fedramp-document/security-awareness-and-training-plan/
 
 UI components:
   - text: Overview

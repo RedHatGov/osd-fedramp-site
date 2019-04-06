@@ -3,108 +3,15 @@ layout: default
 ---
 
 {% capture opencontrol_component %}{{ page.product_info.opencontrol_component }}{% endcapture %}
-{% capture control_family_shorthand %}{{ page.product_info.control_family_shorthand }}{% endcapture %}
+{% capture control_family %}{{ page.product_info.control_family }}{% endcapture %}
+{% capture control_family_shorthand %}{{ page.product_info.control_family }}{% endcapture %}
 {% capture name %}{{ page.product_info.name }}{% endcapture %}
-
-
-<!-- Create an array of 'opencontrol_component' responses against the 'control_family'
-  Returns data array such as:
-
-  control_responses[0]: {"control_key"=>"AC-1", "standard_key"=>"NIST-800-53", "covered_by"=>[], "implementation_status"=>"not applicable", "narrative"=>[{"text"=>"narrative response"}]}
-  
-  control_responses[1]: {"control_key"=>"AC-2", "standard_key"=>"NIST-800-53", "covered_by"=>[], "implementation_status"=>"not applicable", "narrative"=>[{"text"=>"narrative response"}]}
---> 
-{% assign control_responses = site.data.components[opencontrol_component] %}
-
-
-<!-- Create an array of controls known NOT to have a control response. 
-  This is done by merging nist_controls with control_responses and de-duplicating
-  NIST 800-53 keys -->
-
 
 <aside class="sidenav sticky">
   {% assign sidenav = site.data.nav[page.category] %}
   {% if sidenav %}
   <ul class="usa-sidenav-list">
-    {% for link in site.data.nav[page.category] %}
-      {% if link.href %}
-        {% assign _page = link.href | resolve_permalink %}
-      {% else %}
-        {% assign _page = nil %}
-      {% endif %}
-      <li>
-      {% if _page %}
-        {% include nav/current.html page=_page %}
-          <a href="{{ _page.url | relative_url }}"{%
-            if _current %} class="usa-current"{% endif %}>
-            {% unless sidenav %}<span>{% endunless %}
-            {{ include.text | default: _page.title | smartify }}
-            {% unless sidenav %}</span>{% endunless %}
-          </a>
-        {% if _current %}
-          {% unless include.flat %}
-            {% assign _href_key = include.href_key %}
-            {% assign _text_key = include.href_key %}
-            {% assign _sublinks = link.links | default: _page.subnav %}
-          {% if _sublinks.data %}
-            {% assign _href_key = _sublinks.href %}
-            {% assign _text_key = _sublinks.text %}
-            {% assign _data_key = _sublinks.data %}
-            {% assign _sublinks = site.data[_data_key] %}
-
-          {% elsif _sublinks.type %}
-            {% assign _sublinks = nil %}
-          {% endif %}
-          {% if _sublinks %}
-            <ul class="{{ include.subnav_class | default: 'usa-sidenav-sub_list' }}">
-            {% for slink in _sublinks %}
-              {% if slink.href %}
-                {% assign _subpage = slink.href | resolve_permalink %}
-              {% else %}
-                {% assign _subpage = nil %}
-              {% endif %}
-              <li>
-                {% if _subpage %}
-                  {%
-                    include nav/page-item.html
-                    page=_subpage
-                    rel=include.rel
-                    flat=include.flat
-                    links=slink.sublinks
-                    subnav_class=include.subnav_class
-                    text=slink.text
-                  %}
-                  {% for control_response in control_responses.satisfies %}
-                    {% if slink.text contains control_family_shorthand %}
-                      {% if control_response.control_key contains control_family_shorthand %}
-                        <ul class="usa-sidenav-sub_list">
-			  <ul class="usa-sidenav-sub_list">
-                            <li>
-		              <a href="#{{ control_response.control_key }}">{{ control_response.control_key }}</a>
-			    </li>
-                          </ul>
-			</ul>
-                      {% endif %}
-                    {% endif %}
-                  {% endfor %}
-                {% else %}
-                  {% include nav/link-item.html
-                    link=slink
-                    subnav_class=include.subnav_class
-                    href_key=include.href_key
-                    text_key=include.text_key
-                  %}
-                {% endif %}
-              </li>
-            {% endfor %}
-	  </ul>
-          {% endif %}
-          {% endunless %}
-        {% endif %}
-
-      {% endif %}
-      </li>
-    {% endfor %}
+    {% include nav/list.html links=sidenav %}
   </ul>
   {% endif %}
 </aside>
@@ -120,10 +27,8 @@ layout: default
 
     <br /><br />
 
-<!-- BEGIN CONTROL SUMMARY TABLE -->
-<h2>
-  <center>Requirements Traceability Matrix</center>
-</h2>
+    <!-- BEGIN CONTROL SUMMARY TABLE -->
+    <h2><center>Requirements Traceability Matrix</center></h2>
     <center>
       <table width="85%">
         <thead>
@@ -133,45 +38,42 @@ layout: default
             <th>Status</th>
           </tr>
         </thead>
-        {% for control_response in control_responses.satisfies %}
-          {% if control_response.control_key contains control_family_shorthand %}
-            <tr>
-              <td><a href="#{{ control_response.control_key }}">{{ control_response.control_key }}</a></td>
-              <td>{{ site.data.standards.nist-800-53-rev4[control_response.control_key].name }}</td>
-              <td>
-                <center>
-                  {% if control_response.implementation_status == 'complete' or control_response.implementation_status == 'not applicable' %}
-                  <div class="usa-alert usa-alert-success" >
-                  {% elsif control_response.implementation_status == 'partial' %}
-                  <div class="usa-alert usa-alert-warning" >
-                  {% elsif control_response.implementation_status == 'planned' %}
-                  <div class="usa-alert usa-alert-info" > 
-                  {% else %} 
-                  <div class="usa-alert usa-alert-error" role="alert" > 
-                  {% endif %} 
-                    <div class="usa-alert-body">
-                       <p class="usa-alert-text">{{ control_response.implementation_status }}</p>
-                    </div>
-                  </div>
-                </center>
-              </td>
-            </tr>
-          {% endif %}
+        {% for control_response in site.data.opencontrols.components.[opencontrol_component].component %}
+        <tr>
+          <td><a href="#{{ control_response.control_key }}">{{ control_response.control_key }}</a></td>
+          <td>{{ site.data.opencontrols.standards.nist-800-53-rev4[control_response.control_key].name }}</td>
+          <td>
+            <center>
+              {% if control_response.implementation_status == 'complete' or control_response.implementation_status == 'not applicable' %}
+              <div class="usa-alert usa-alert-success" >
+              {% elsif control_response.implementation_status == 'partial' %}
+              <div class="usa-alert usa-alert-warning" >
+              {% elsif control_response.implementation_status == 'planned' %}
+              <div class="usa-alert usa-alert-info" > 
+              {% else %} 
+              <div class="usa-alert usa-alert-error" role="alert" > 
+              {% endif %} 
+                <div class="usa-alert-body">
+                   <p class="usa-alert-text">{{ control_response.implementation_status }}</p>
+                </div>
+              </div>
+            </center>
+          </td>
+        </tr>
         {% endfor %}
       </table>
     </center>
-<!-- BEGIN CONTROL SUMMARY TABLE -->
+    <!-- END CONTROL SUMMARY TABLE -->
 
-<!-- BEGIN CONTROL RESPONSE TABLE -->
-    {% for control_response in site.data.components[opencontrol_component].satisfies %}
-      {% if control_response.control_key contains control_family_shorthand %}
+    <!-- BEGIN CONTROL RESPONSE TABLE -->
+    {% for control_response in site.data.opencontrols.components.[opencontrol_component].component %}
       <div class="usa-grid" id="{{ control_response.control_key }}">
         <br /><hr class="homepage-rule center-diamond" /><br />
       </div>
 
       <div class="alignment-example" align="center">
-        <h2>{{ control_response.control_key }}: {{ site.data.standards.nist-800-53-rev4[control_response.control_key].name }}</h2>
-        <h4>{{ site.data.standards.nist-800-53-rev4[control_response.control_key].description | markdownify }}</h4>
+        <h2>{{ control_response.control_key }}: {{ site.data.opencontrols.standards.nist-800-53-rev4[control_response.control_key].name }}</h2>
+        <h4>{{ site.data.opencontrols.standards.nist-800-53-rev4[control_response.control_key].description | markdownify }}</h4>
       </div>
 
     <center>
@@ -279,10 +181,10 @@ layout: default
       {% endfor %}
     </table>
   </center>
-    {% endif %}
+
     {% endfor %}
 
     <!-- END CONTROL RESPONSE LOOP -->
+  </div>
 
-  </div> <!-- end styleguide-content. This should be 2nd to last tag on template -->
-</main> <!-- end main-content. This should be the last tag on template page -->
+</main>
