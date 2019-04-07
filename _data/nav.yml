@@ -78,8 +78,10 @@ UI components:
 Getting started:
   - text: Overview
     href: /getting-started/
-  - href: /getting-started/auditors/
-  - href: /getting-started/administrators/
+  - text: Information System Name/Title
+    href: /getting-started/information-system-name-title/
+  - text: zInformation System Type
+    href: /getting-started/information-system-type/
 
 Page templates:
   - href: /page-templates/
