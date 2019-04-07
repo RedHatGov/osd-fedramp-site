@@ -1,8 +1,8 @@
 ---
 permalink: /getting-started/
 layout: styleguide
-title: Getting started
-category: Getting started
+title: Getting Started
+category: Getting Started
 lead: The Red Hat ATO Pathways microsite provides resources to accelerate your ATO process.
 ---
 

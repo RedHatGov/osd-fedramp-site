@@ -3,12 +3,12 @@ primary:
   - href: /fedramp-documents/
   - href: /security-controls/
 
-mobile:
-  - href: /getting-started/
-    collapsible: true
-  - href: /ato-documents/
-  - href: /product-documents/
-    collapsible: true
+#mobile:
+#  - href: /getting-started/
+#    collapsible: true
+#  - href: /ato-documents/
+#  - href: /product-documents/
+#    collapsible: true
 
 Security Controls:
   - text: Overview
@@ -75,12 +75,12 @@ UI components:
   - href: /components/headers/
   - href: /components/footers/
 
-Getting started:
+Getting Started:
   - text: Overview
     href: /getting-started/
   - text: Information System Name/Title
     href: /getting-started/information-system-name-title/
-  - text: zInformation System Type
+  - text: Information System Type
     href: /getting-started/information-system-type/
 
 Page templates:
