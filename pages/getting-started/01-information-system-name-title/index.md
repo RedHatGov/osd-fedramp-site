@@ -2,7 +2,7 @@
 permalink: /getting-started/information-system-name-title
 layout: styleguide
 title: Information System Name/Title
-category: Getting started
+category: Getting Started
 lead:
 ---
 
