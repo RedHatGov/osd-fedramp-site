@@ -4,12 +4,18 @@ layout: styleguide
 title: Information System Categorization
 category: Getting Started
 lead:
+subnav:
+  - text: Information Types
+    link: '#information-types'
+  - text: Security Objectives Categorization (FIPS 199)
+    href: '#security-objectives-categorization'
+  - text: Digital Identity Determination
+    href: '#digital-identity-determination'
 ---
 
 
 The overall information system sensitivity categorization is recorded below. 
 
-Security Categorization
 <table>
 	<tr>
 		<td>System Sensitivity Level:</td>
@@ -43,6 +49,36 @@ The potential impact is high if:
 </ul>
 
 Sensitivity Categorization of Information Types
+
 | Information Type (Use only information types from NIST SP 800-60, Volumes I and II as amended) | NIST 800-60 identifier for Associated Information Type | Confidentiality | Integrity | Availability |
 |:---|:---|:--:|:--:|:--:|
 | TBD | TBD | TBD | TBD | TBD |
+
+## Security Objectives Categorization (FIPS 199)
+Based on the information provided in the Sensitivity Categorization of Information Types, for Red Hat OpenShift Dedicated, default to the high-water mark for the Information Types as identified in the table below:
+
+Security Impact Level
+
+| Security Objective | Low, Moderate, or High |
+|:-------------------|:----------------------:|
+| TBD | TBD |
+
+Through review and analysis, it has been determined that the baseline security categorization for Red Hat OpenShift Dedicated is listed in the table below:
+
+<table>
+	<tr>
+		<td>Enter Information System Abbreviation Security Categorization</td>
+		<td>Moderate</td>
+	</tr>
+</table>
+
+Using this categorization, in conjunction with the risk assessment and any unique security requirements, we have established the security controls for this system, as detailed in this SSP.
+
+## Digital Identity Determination
+The digital identity information may be found in ATTACHMENT 3 - Digital Identity Worksheet.
+
+Note: NIST SP 600-63-3, "Digital Identity Guidelines," does not recognize the four Levels of Assurance model previously used by federal agencies and described in OMB M-04-04, instead requiring agencies to individually select levels corresponding to each function being performed.
+
+The digital identity level is: TBD
+
+Additional digital identity information can be found in Section 15 Attachements Digital Identity Level Selection.

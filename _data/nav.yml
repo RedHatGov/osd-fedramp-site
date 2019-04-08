@@ -80,8 +80,28 @@ Getting Started:
     href: /getting-started/
   - text: Information System Name/Title
     href: /getting-started/information-system-name-title/
+  - text: Information System Categorization
+    href: /getting-started/information-system-categorization/
+  - text: Information System Owner
+    href: /getting-started/information-system-owner/
+  - text : Authorizing Official
+    href: /getting-started/authorizing-official/
+  - text: Other Designated Contacts
+    href: /getting-started/other-designated-contacts/
+  - text: Assignment of Security Responsibility
+    href: /getting-started/assignment-of-security-responsibility/
+  - text: Information System Operational Status
+    href: /getting-started/information-system-operational-status/
   - text: Information System Type
     href: /getting-started/information-system-type/
+  - text: General System Description
+    href: /getting-started/general-system-description/
+  - text: System Environment and Inventory
+    href: /getting-started/system-environment-and-inventory/
+  - text: System Interconnections
+    href: /getting-started/system-interconnections/
+  - text: Laws, Regulations, Standards and Guidance
+    href: /getting-started/laws-regulations-standards-and-guidance/
 
 Page templates:
   - href: /page-templates/

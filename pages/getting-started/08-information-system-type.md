@@ -2,7 +2,7 @@
 permalink: /getting-started/information-system-type/
 layout: styleguide
 title: Information System Type
-category: Getting started
+category: Getting Started
 lead:
 subnav:
   - text: Cloud Service Models
@@ -13,6 +13,7 @@ subnav:
     href: '#leveraged-authorizations'
 ---
 
+Red Hat OpenShift Dedicated makes use of unique managed service provider architecture layer(s).
 
 ## Cloud Service Models
 Information systems, particularly those based on cloud architecture models, are made up of different service layers. Below are some questions that help system owners determine if their system is a cloud followed by specific questions to help the system owner determine the type of cloud.
