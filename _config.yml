@@ -77,3 +77,5 @@ exclude:
   - package.json
   - gulpfile.js
   - circle.yml
+
+theme: jekyll-theme-cayman
