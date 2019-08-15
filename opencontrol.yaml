@@ -20,6 +20,6 @@ dependencies:
     - url: https://github.com/opencontrol/certifications
       revision: master
   systems:
-    - url: git@github.com:RedHatGov/osd-opencontrol.git
-      contextdir: /
-      revision: master
+    - url: https://github.com/ComplianceAsCode/redhat
+      contextdir: openshift-dedicated
+      revision: opencontrol
