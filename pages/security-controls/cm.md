@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: CM-Configuration_Management
   control_family_shorthand: CM
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: SI-System_and_Information_Integrity
   control_family_shorthand: SI
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

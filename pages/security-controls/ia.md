@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: IA-Identification_and_Authentication
   control_family_shorthand: IA
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

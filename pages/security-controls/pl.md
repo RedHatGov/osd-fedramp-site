@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: PL-Planning
   control_family_shorthand: PL
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

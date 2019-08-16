@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: AU-Audit_and_Accountability
   control_family_shorthand: AU
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

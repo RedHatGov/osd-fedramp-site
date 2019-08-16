@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: RA-Risk_Assessment
   control_family_shorthand: RA
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

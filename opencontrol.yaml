@@ -22,4 +22,4 @@ dependencies:
   systems:
     - url: https://github.com/ComplianceAsCode/redhat
       contextdir: openshift-dedicated
-      revision: opencontrol
+      revision: master

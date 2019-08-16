@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: CP-Contingency_Planning
   control_family_shorthand: CP
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

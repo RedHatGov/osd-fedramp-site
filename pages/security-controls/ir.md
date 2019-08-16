@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: IR-Incident_Response
   control_family_shorthand: IR
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

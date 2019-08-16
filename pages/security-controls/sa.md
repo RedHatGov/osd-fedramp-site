@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: SA-System_and_Services_Acquisition
   control_family_shorthand: SA
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

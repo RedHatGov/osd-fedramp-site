@@ -4,7 +4,7 @@ layout: default
 
 {% capture opencontrol_component %}{{ page.product_info.opencontrol_component }}{% endcapture %}
 {% capture control_family %}{{ page.product_info.control_family }}{% endcapture %}
-{% capture control_family_shorthand %}{{ page.product_info.control_family }}{% endcapture %}
+{% capture control_family_shorthand %}{{ page.product_info.control_family_shorthand }}{% endcapture %}
 {% capture name %}{{ page.product_info.name }}{% endcapture %}
 
 <aside class="sidenav sticky">
@@ -29,164 +29,200 @@ layout: default
 
 Controls were last updated {{ "now" | date: "%Y-%m-%d at %H:%M" }} UTC.
 
-    <!-- BEGIN CONTROL SUMMARY TABLE -->
-    <h2><center>Requirements Traceability Matrix</center></h2>
-    <center>
-      <table width="85%">
-        <thead>
-          <tr>
-            <th>Control</th> 
-            <th>Name</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        {% for control_response in site.data.opencontrols.components.[opencontrol_component].component %}
-        <tr>
-          <td><a href="#{{ control_response.control_key }}">{{ control_response.control_key }}</a></td>
-          <td>{{ site.data.opencontrols.standards.nist-800-53-rev4[control_response.control_key].name }}</td>
-          <td>
-            <center>
-              {% if control_response.implementation_status == 'complete' or control_response.implementation_status == 'not applicable' %}
-              <div class="usa-alert usa-alert-success" >
-              {% elsif control_response.implementation_status == 'partial' %}
-              <div class="usa-alert usa-alert-warning" >
-              {% elsif control_response.implementation_status == 'planned' %}
-              <div class="usa-alert usa-alert-info" > 
-              {% else %} 
-              <div class="usa-alert usa-alert-error" role="alert" > 
-              {% endif %} 
+ DEBUG OUTPUT 
+<p>component = {{ opencontrol_component }}</p>
+<p>control family = {{ control_family }}</p>
+<p>control shorthand = {{ control_family_shorthand }}</p>
+<p>name = {{ name }} </p>
+
+
+
+
+<!-- BEGIN NEW CONTROL SUMMARY TABLE -->
+
+<h2>
+  <center>Requirements Traceability Matrix</center>
+</h2>
+<center>
+  <table width="85%">
+    <thead>
+      <tr>
+        <th>Control</th>
+        <th>Name</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    {% for fedramp_control_array in site.data.certifications.fedramp-moderate.standards.NIST-800-53 %}
+      {% assign fedramp_control = fedramp_control_array[0] %}
+      {% if fedramp_control contains page.product_info.control_family_shorthand %}
+        
+    <tr>
+      <td><a href="#{{ fedramp_control }}">{{ fedramp_control }}</a></td>
+      <td>{{ site.data.standards.nist-800-53-rev4[fedramp_control].name }}</td>
+      <td>
+        <center>
+        <!-- For every response in the OpenControl data... -->
+        {% for key_response in site.data.components.[page.product_info.opencontrol_component].component %}
+        <!-- Evaluate if the array element matches the NIST 800-53 key
+                         currently being documented -->
+        {% if key_response.control_key == fedramp_control %}
+        <!-- And if it does... -->
+        
+        <!-- setup the appropriate div class -->
+        {% if key_response.implementation_status == 'complete' or key_response.implementation_status == 'not applicable' %}
+        <div class="usa-alert usa-alert-success">
+          {% elsif key_response.implementation_status == 'partial' %}
+          <div class="usa-alert usa-alert-warning">
+            {% elsif key_response.implementation_status == 'planned' %}
+            <div class="usa-alert usa-alert-info">
+              {% else %}
+              <!-- if not complete, not applicable, partial, or planned, throw an 'alert' class -->
+              <div class="usa-alert usa-alert-error" role="alert">
+                {% endif %}
+        
+                <!-- Populate the content of the implementation_status class -->
                 <div class="usa-alert-body">
-                   <p class="usa-alert-text">{{ control_response.implementation_status }}</p>
+                  <p class="usa-alert-text">{{ key_response.implementation_status }}</p>
                 </div>
               </div>
-            </center>
-          </td>
-        </tr>
-        {% endfor %}
-      </table>
-    </center>
-    <!-- END CONTROL SUMMARY TABLE -->
+        
+              <!-- Indicate there was a match between the OpenControl content and NIST 800-53 control -->
+              {% assign match = true %}
+              <!-- Break out of the loop. Technically not needed, but makes builds faster -->
+              {% break %}
+              {% endif %}
+              <!-- Reset the match variable now that we're out of the for-loop -->
+              {% assign match = false %}
+              {% endfor %}
+              <!-- If there wasn't a match, insert "unknown" into the alert div class -->
+              {% if match != true %}
+              <div class="usa-alert usa-alert-error" role="alert">
+                <div class="usa-alert-body">
+                  <p class="usa-alert-text">unknown</p>
+                </div>
+              </div>
+              {% endif %}
+        </center>
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+</center>
 
-    <!-- BEGIN CONTROL RESPONSE TABLE -->
-    {% for control_response in site.data.opencontrols.components.[opencontrol_component].component %}
-      <div class="usa-grid" id="{{ control_response.control_key }}">
-        <br /><hr class="homepage-rule center-diamond" /><br />
-      </div>
 
-      <div class="alignment-example" align="center">
-        <h2>{{ control_response.control_key }}: {{ site.data.opencontrols.standards.nist-800-53-rev4[control_response.control_key].name }}</h2>
-        <h4>{{ site.data.opencontrols.standards.nist-800-53-rev4[control_response.control_key].description | markdownify }}</h4>
-      </div>
+<!-- BEGIN NEW CONTROL RESPONSE TABLES -->
+{% for fedramp_control_array in site.data.certifications.fedramp-moderate.standards.NIST-800-53 %}
+{% assign fedramp_control = fedramp_control_array[0] %}
+{% if fedramp_control contains page.product_info.control_family_shorthand %}
 
-    <center>
-    <table width="85%">
-      <thead>
-        <tr>
-          <th scope="row">
-            <strong>
-              <center>
-                {{ control_response.control_key }} Control Response Information
-              </center>
-            </strong>
-          </th>
-        </tr>
-      </thead>
+<div class="usa-grid" id="{{fedramp_control }}">
+  <br />
+  <hr class="homepage-rule center-diamond" /><br />
+</div>
+<div class="alignment-example" align="center">
+  <h2>{{ fedramp_control }}: {{ site.data.standards.nist-800-53-rev4[fedramp_control].name }}</h2>
+  <h4>{{ site.data.standards.nist-800-53-rev4[fedramp_control].description | markdownify }}</h4>
+</div>
+
+<center>
+  <table width="85%">
+    <thead>
       <tr>
-        <td>
-          <b>Implementation Status: </b> 
-          {% if control_response.implementation_status == 'complete' or control_response.implementation_status == 'not applicable' %}
-          <div class="usa-alert usa-alert-success" >
-          {% elsif control_response.implementation_status == 'partial' %}
-          <div class="usa-alert usa-alert-warning" >
-          {% elsif control_response.implementation_status == 'planned' %}
-          <div class="usa-alert usa-alert-info" > 
-          {% else %} 
-          <div class="usa-alert usa-alert-error" role="alert" > 
-          {% endif %} 
+        <th scope="row">
+          <strong>
+            <center>
+              {{ fedramp_control }} Control Response Information
+            </center>
+          </strong>
+        </th>
+      </tr>
+    </thead>
+    <tr>
+      <td>
+        <b>Implementation Status: </b>
+        <!-- For every response in the OpenControl data... -->
+        {% for key_response in site.data.components.[page.product_info.opencontrol_component].component %}
+        <!-- Evaluate if the array element matches the NIST 800-53 key
+                 currently being documented -->
+        {% if key_response.control_key == fedramp_control %}
+        <!-- And if it does... -->
+
+        <!-- setup the appropriate div class -->
+        {% if key_response.implementation_status == 'complete' or key_response.implementation_status == 'not applicable' %}
+          <div class="usa-alert usa-alert-success">
+        {% elsif key_response.implementation_status == 'partial' %}
+          <div class="usa-alert usa-alert-warning">
+        {% elsif key_response.implementation_status == 'planned' %}
+          <div class="usa-alert usa-alert-info">
+        {% else %}
+          <!-- if not complete, not applicable, partial, or planned, throw an 'alert' class -->
+          <div class="usa-alert usa-alert-error" role="alert">
+        {% endif %}
+
+        <!-- Populate the content of the implementation_status class -->
+        <div class="usa-alert-body">
+          <p class="usa-alert-text">{{ key_response.implementation_status }}</p>
+        </div>
+        </div>
+
+        <!-- Indicate there was a match between the OpenControl content and NIST 800-53 control -->
+        {% assign match = true %}
+        <!-- Break out of the loop. Technically not needed, but makes builds faster -->
+        {% break %}
+        {% endif %}
+        <!-- Reset the match variable now that we're out of the for-loop -->
+        {% assign match = false %}
+        {% endfor %}
+        <!-- If there wasn't a match, insert "unknown" into the alert div class -->
+        {% if match != true %}
+          <div class="usa-alert usa-alert-error" role="alert">
             <div class="usa-alert-body">
-              <p class="usa-alert-text">{{ control_response.implementation_status }}</p>
+              <p class="usa-alert-text">unknown</p>
             </div>
           </div>
-        </td>
-      </tr>
-      <!--<tr>
-        <td>Control Origination:
-          <ul>
-            <li>Provided By Customer (Customer System Specific)</li>
-            <li>Shared (Service Provider and Customer Responsibility)</li>
-          </ul>
-          There should be a checklist here:
-          <fieldset>
-      
-        <div>
-            <input type="checkbox" id="Service_Provider_Corporate" name="origination"
-                   value="Service_Provider_Corporate" checked />
-            <label for="Service_Provider_Corporate">Service Provider Corporate</label>
-        </div>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
 
-        <div>
-            <input type="checkbox" id="Service_Provider_System_Specific" name="origination"
-                   value="Service_Provider_System_Specific" />
-            <label for="Service_Provider_System_Specific">Service Provider System Specific</label>
-        </div>
-
-        <div>
-            <input type="checkbox" id="Service_Provider_Hybrid" name="origination"
-                   value="Service_Provider_Hybrid" />
-            <label for="Service_Provider_Hybrid">Service Provider Hybrid (Corporate and System Specific)</label>
-        </div>
-
-        <div>
-            <input type="checkbox" id="Configured_By_Customer" name="origination"
-                   value="Configured_By_Customer" />
-            <label for="Configured_By_Customer">Configured By Customer (Customer System Specific)</label>
-        </div>
-
-        <div>
-            <input type="checkbox" id="Service_Provider_Hybrid" name="origination"
-                   value="Service_Provider_Hybrid" />
-            <label for="Service_Provider_Hybrid">Service Provider Hybrid (Corporate and System Specific)</label>
-        </div>
-
-        <div>
-            <input type="checkbox" id="Service_Provider_Hybrid" name="origination"
-                   value="Service_Provider_Hybrid" />
-            <label for="Service_Provider_Hybrid">Service Provider Hybrid (Corporate and System Specific)</label>
-        </div>
-
-        <div>
-            <input type="checkbox" id="Service_Provider_Hybrid" name="origination"
-                   value="Service_Provider_Hybrid" />
-            <label for="Service_Provider_Hybrid">Service Provider Hybrid (Corporate and System Specific)</label>
-        </div>
-
-    </fieldset>
-        </td>
-      </tr> -->
-    </table>
-
-    <table width="85%">
-      <thead>
-        <tr>
-          <th>{{ control_response.control_key }}: What is the solution and how is it implemented?</th>
-        </tr>
-      </thead>
-      {% for key in control_response.narrative %}
+  <table width="85%">
+    <thead>
       <tr>
-        <td>
-          {% if key.key != null %}
-          <b>{{ control_response.control_key }}({{ key.key }}):</b>
-          {% endif %}
-          {{ key.text | markdownify  | replace: '\n', '<br />' | replace: "'", '<p>' | replace: "'", '</p>' }}
-        </td>
+        <th>{{ fedramp_control }}: What is the solution and how is it implemented?</th>
       </tr>
-      {% endfor %}
-    </table>
-  </center>
-
+    </thead>
+    {% for key_response in site.data.components.[page.product_info.opencontrol_component].component %}
+    <!-- Evaluate if the array element matches the NIST 800-53 key
+         currently being documented -->
+    {% if key_response.control_key == fedramp_control %}
+    <!-- And if it does... -->
+     {% for key in key_response.narrative %}
+    <tr>
+      <td>
+        {% if key.key != null %}
+        <b>{{ fedramp_control }}({{ key.key }}):</b>
+        {% endif %}
+        {{ key.text | markdownify  | replace: '\n', '<br />' | replace: "'", '<p>' | replace: "'", '</p>' }}
+      </td>
+    </tr>
     {% endfor %}
+    {% assign match = true %}
+    {% break %}
+    {% endif %}
+    {% assign match = false %}
+    {% endfor %}
+    {% if match != true %}
+    <tr>
+      <td>This control has not been evaluated in the context of {{ page.product_info.name }}.</td>
+    </tr>
+    {% endif %}
+  </table>
+</center>
+{% endif %}
+{% endfor %}
 
-    <!-- END CONTROL RESPONSE LOOP -->
-  </div>
+<!-- END CONTROL RESPONSE LOOP -->
 
-</main>
+</div> <!-- end styleguide-content. This should be 2nd to last tag on template -->
+</main> <!-- end main-content. This should be the last tag on template page -->

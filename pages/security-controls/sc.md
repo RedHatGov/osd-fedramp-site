@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: SC-Systems_and_Communications_Protection
   control_family_shorthand: SC
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

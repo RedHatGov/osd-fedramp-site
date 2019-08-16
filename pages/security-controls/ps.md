@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: PS-Personnel_Security
   control_family_shorthand: PS
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

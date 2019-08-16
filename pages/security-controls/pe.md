@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: PE-Physical_and_Environmental_Protection
   control_family_shorthand: PE
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key

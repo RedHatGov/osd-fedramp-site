@@ -8,6 +8,7 @@ lead: |
 product_info:
   opencontrol_component: MA-Maintenance
   control_family_shorthand: MA
+  name: OpenShift Dedicated
 subnav:
   data: opencontrols.components.[opencontrol_component].component
   text: control_key
