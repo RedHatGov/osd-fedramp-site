@@ -11,7 +11,7 @@ The following individual is identified as the system owner or functional propone
 Information System Owner
 
 | Name | <TBD> |
-| Title | <TBD |
+| Title | <TBD> |
 | Company / Organization | Red Hat |
 | Address | <TBD> |
 | Phone Number | <TBD> |
